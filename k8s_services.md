@@ -4,6 +4,8 @@ title: "Services"
 permalink: /k8s_services
 nav_order: 7
 ---
+# Materials
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/05-services/ .**
 # Tasks
 ## ClusterIP
 ### Create a Cluster IP

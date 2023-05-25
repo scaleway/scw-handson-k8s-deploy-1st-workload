@@ -4,6 +4,8 @@ title: "Docker"
 permalink: /docker
 nav_order: 3
 ---
+# Materials
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/01-docker/ .**
 # Tasks
 
 ## Setup Validation

@@ -4,6 +4,8 @@ title: "Config Map"
 permalink: /config-map
 nav_order: 10
 ---
+# Materials
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/08-configmap/ .**
 # Tasks
 ## Lifecycle Management
 ### Create a configmap

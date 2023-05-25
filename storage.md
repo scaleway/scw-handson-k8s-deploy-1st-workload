@@ -4,6 +4,8 @@ title: "Storage"
 permalink: /storage
 nav_order: 9
 ---
+# Materials
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/07-storage/ .**
 # Tasks
 ## Storage Classes
 

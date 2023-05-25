@@ -4,6 +4,8 @@ title: "Deployments"
 permalink: /k8s_deployment
 nav_order: 6
 ---
+# Materials
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/04-deployment/ .**
 # Tasks
 ## Create a deployment
 Here we use a yaml descriptor to create a deployment that manage a POC with one container.

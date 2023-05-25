@@ -4,6 +4,8 @@ title: "Pods"
 permalink: /k8s_pod
 nav_order: 5
 ---
+# Materials
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/03-pod/ .**
 # Tasks
 ## Create a single container pod
 A POD can be created  using the command line or using a yaml file.

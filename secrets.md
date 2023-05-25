@@ -4,6 +4,8 @@ title: "Secrets"
 permalink: /secrets
 nav_order: 11
 ---
+# Materials
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/09-secret/ .**
 # Tasks
 ## Lifecycle Management
 ### Create a secret
