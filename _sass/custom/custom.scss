@@ -1,0 +1,25 @@
+$scw-base-color: #4F0599;
+$body-heading-color: rgba($scw-base-color,1);
+.site-title {
+    @include container;
+    flex-grow: 1;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding-top: $sp-3;
+    padding-bottom: $sp-3;
+    color: $body-heading-color;
+    font-weight: bold;
+    @include fs-4;
+  
+    @include mq(md) {
+      padding-top: $sp-2;
+      padding-bottom: $sp-2;
+    }
+  }
+
+  .site-footer {
+    position: static;
+    justify-self: end;
+    display: none;
+}
