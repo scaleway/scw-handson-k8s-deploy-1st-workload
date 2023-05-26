@@ -4,8 +4,12 @@ title: "Pods"
 permalink: /k8s_pod
 nav_order: 5
 ---
-# Materials
-**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/03-pod/ .**
+# Prerequisites
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/exercice-files/03-pod/ .**
+```
+cd /home/ubuntu/exercice-files/03-pod/
+```
+
 # Tasks
 ## Create a single container pod
 A POD can be created  using the command line or using a yaml file.
@@ -14,22 +18,12 @@ A POD can be created  using the command line or using a yaml file.
 kubectl run nginx-pod-command-line --image=nginx:latest
 ```
 2. Yaml Description
-You need to first create a file with the content below
-```
-apiVersion: v1
-kind: Pod
-metadata:
- creationTimestamp: null
- labels:
-   run: nginx-pod-yaml
- name: nginx-pod-yaml
-spec:
- containers:
- - image: nginx:latest
-   name: nginx-pod-yaml
-   resources: {}
-```
-then you can create Kubernetes resources using that yaml descriptor.
+
+- We  use here the yaml file **/home/ubuntu/exercice-files/03-pod/single-container-pod.yaml**.
+
+`cat single-container-pod.yaml`
+
+- You can then create Kubernetes resources using that yaml descriptor.
 ```
 kubectl create -f single-container-pod.yaml
 ```
@@ -39,22 +33,12 @@ kubectl create -f single-container-pod.yaml
 kubectl run nginx-pod --image=nginx:latest  --dry-run=client -o yaml > nginx-pod.yaml
 ```
 ## Create a multi container pod
+We  use here the yaml file **/home/ubuntu/exercice-files/03-pod/multi-container-pod.yaml**
+
+`cat multi-container-pod.yaml`
+
 ```
 kubectl create -f multi-container-pod.yaml
-```
-```
-apiVersion: v1
-kind: Pod
-metadata:
- labels:
-  app: nginx-multi-container
- name: nginx-multi-container
-spec:
- containers:
-  - image: nginx:latest
-    name: nginx-container
-  - image: redis:latest
-    name: redis-container
 ```
 ## Get Pods Information
 - Get all pods
@@ -63,23 +47,23 @@ kubectl get pods
 ```
 - Get a specific pod
 ```
-kubectl get pod nginx-pod-yaml
+kubectl get pod nginx-single-container 
 ```
-![Astuce icon](assets/images/pods/kubectl_get_pods.png)
+![Get pods](assets/images/pods/kubectl_get_pods.png)
 
 <br/>
 
 ![Astuce icon](assets/images/astuce_icon.png) The **wide** output allows you to request for more details regarding the outputs of the request
 ```
-kubectl get pod nginx-pod-yaml -o wide
+kubectl get pod nginx-single-container  -o wide
 ```
-![Astuce icon](assets/images/pods/kubectl_get_specific_pods_wiide.png)
+![Kubectl get specific pod](assets/images/pods/kubectl_get_specific_pods_wide.png)
 
 <br/>
 
 ![Astuce icon](assets/images/astuce_icon.png) The json/yaml outputs allows you  to retrieve all objects configuration respectively in json and yaml format.
 ```
-kubectl get pod nginx-pod-yaml -o json
+kubectl get pod nginx-single-container  -o json
 ```
 ![Astuce icon](assets/images/pods/kubectl_get_specific_pods_json.png)
 
@@ -92,98 +76,48 @@ kubectl describe pod nginx-multi-container
 ![Kubectl describe](assets/images/pods/kubectl_describe_pod.png)
 - Get logs 
 ```
-kubectl logs nginx-single-container-resource
+kubectl logs nginx-single-container
 ```
 ![PODS display logs](assets/images/pods/kubectl_logs_pods.png)
+
 ## Configure POD
-- Specify POD Resources
+
+### POD Resources
+We  use here the yaml file **/home/ubuntu/exercice-files/03-pod/single-container-pod-resources.yaml**
+
+- `cat single-container-pod-resources.yaml`
+
 ```
 kubectl create -f single-container-pod-resources.yaml
 ```
-<br/>
+### Command and Args 
+We  use here the yaml file **/home/ubuntu/exercice-files/03-pod/command-container-pod.yaml**
 
-```
-apiVersion: v1
-kind: Pod
-metadata:
- labels:
-   app: nginx-single-container-resource
- name: nginx-single-container-resource
-spec:
- containers:
-  - image: nginx:latest
-    name: nginx-container
-    resources:
-      requests:
-        memory: "64Mi"
-        cpu: "250m"
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
-```
-- Define a command and Args for a container
+- `cat command-container-pod.yaml`
+
 ```
  kubectl create -f command-container-pod.yaml
 ```
-
-<br/>
+- Show application logs
 
 ```
-apiVersion: v1
-kind: Pod
-metadata:
- labels:
-   app: command-container-pod
- name: command-container-pod
-spec:
- containers:
- - image: busybox:latest
-   name: busybox-container
-   # This command display the message each 5 seconds
-   command: ["sh"]
-   args: ["-c", "while true; do echo Welcome to Scaleway Kubernetes Handson; sleep 5;done"]
-   resources:
-      requests:
-        memory: "64Mi"
-        cpu: "250m"
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
+kubectl logs command-container-pod
 ```
-<br/>
-
 ![Command POD logs](assets/images/pods/kubectl_cmd_container_logs.png)
 
-- Inject Environment variables in POD
+### Environment variables injection
+
+We  use here the yaml file **/home/ubuntu/exercice-files/03-pod/single-container-pod-resources.yaml**
+
+- `cat environment-container-pod.yaml`
+
 ```
 kubectl create -f environment-container-pod.yaml
 ```
-<br/>
+- Show application logs
 
 ```
-apiVersion: v1
-kind: Pod
-metadata:
- labels:
-   app: environment-container-pod
- name: environment-container-pod
-spec:
- containers:
- - image: busybox:latest
-   name: busybox-container
-   env:
-   - name: MESSAGE
-     value: Welcome to Scaleway Kubernetes Hands-on (from env!!!)
-   # This command display the message each 5 seconds
-   command: ["sh"]
-   args: ["-c", "while true; do echo $MESSAGE; sleep 5;done"]
-   resources:
-      requests:
-        memory: "64Mi"
-        cpu: "250m"
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
+kubectl logs environment-container-pod
 ```
 ![Environment Container logs](assets/images/pods/kubectl_env_container_logs.png)
 

@@ -4,39 +4,21 @@ title: "Deployments"
 permalink: /k8s_deployment
 nav_order: 6
 ---
-# Materials
-**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/04-deployment/ .**
+# Prerequisites
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/exercice-files/04-deployment .**
+```
+cd /home/ubuntu/exercice-files/04-deployment
+```
+
 # Tasks
 ## Create a deployment
-Here we use a yaml descriptor to create a deployment that manage a POC with one container.
+We  use here the yaml file **/home/ubuntu/exercice-files/04-deployment/busy-deployment.yaml**
+
+- `cat busy-deployment.yaml`
+
 ```
 kubectl create -f busy-deployment.yaml
 ```
-<br/>
-```
-apiVersion: apps/v1
-kind: Deployment
-metadata:
- labels:
-   app: busy-deployment
- name: busy-deployment
-spec:
- replicas: 1
- selector:
-   matchLabels:
-     app: busy-deployment
- template:
-   metadata:
-     labels:
-       app: busy-deployment
-   spec:
-     containers:
-     - image: busybox:1.35.0
-       name: busybox
-       command: ["sh"]
-       args: ["-c", "sleep 4800"]
-```
-<br/>
 
 ## Retrieve a deployment
 - Get All deployments

@@ -4,8 +4,6 @@ title: "Namespaces"
 permalink: /namespaces
 nav_order: 8
 ---
-# Materials
-**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/06-namespaces/ .**
 # Tasks
 ## Lifecycle Management
 - Create a namespace

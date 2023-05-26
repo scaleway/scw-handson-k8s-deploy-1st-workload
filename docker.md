@@ -4,8 +4,8 @@ title: "Docker"
 permalink: /docker
 nav_order: 3
 ---
-# Materials
-**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/01-docker/ .**
+# Prerequisites
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/exercice-files/exercice-files/01-docker/ .**
 # Tasks
 
 ## Setup Validation
@@ -25,7 +25,7 @@ sudo docker run hello-world
 We will deploy here a container based on [nginx web server official image](https://hub.docker.com/_/nginx)
 
 ```
-sudo docker run --name nginx -p 80:80 -d nginx:latest
+sudo docker run -p 80:80 -d  nginx:latest
 ```
 ![Docker Nginx Validation](assets/images/docker/nginx_docker.png)
 
@@ -52,18 +52,16 @@ sudo docker ps -a
 
 ## Create your 1st docker image
 We will use the nginx official image we used before to create our own image that will show a different homepage.
-1. Create a folder where your files will be located 
-```
-mkdir -p  01-docker/my-first-image
-```
-2. Create your Dockerfile
-```
-FROM nginx:latest
-RUN echo "<h1>Scaleway Kubernetes Hands-on : Deploy your 1st workload</h1>" > /usr/share/nginx/html/index.html
-```
+
+1. Open the exercice file folder <br/>
+`cd /home/ubuntu/exercice-files/exercice-files/01-docker/`
+1. Read the Dockerfile content <br/>
+`cat my-first-image/Dockerfile`
+
+![my_first_docker_image.png](assets/images/docker/my_first_docker_image.png)
 3. Build your image
 ```
-sudo docker build -t my-first-image 01-docker/my-first-image
+sudo docker build -t my-first-image my-first-image
 ```
 
 ![Build Image](assets/images/docker/build-image.png)
@@ -86,7 +84,7 @@ sudo docker login $SCW_REGISTRY_ENDPOINT -u nologin --password-stdin <<< "$SCW_S
 ```
 1. Build and Tag your custom image
 ```
-sudo docker build -t $SCW_REGISTRY_ENDPOINT/my-first-image:0.1 01-docker/my-first-image
+sudo docker build -t $SCW_REGISTRY_ENDPOINT/my-first-image:0.1 my-first-image
 ```
 1. Push your custom image
 ```
@@ -97,6 +95,8 @@ sudo docker push $SCW_REGISTRY_ENDPOINT/my-first-image:0.1
 sudo docker run -p 8082:80 -d  $SCW_REGISTRY_ENDPOINT/my-first-image:0.1
 ```
 You should be able to reach your nginx container using your instance public ip on port 8082 and your local browser.
+
+![my_first_container_private_repo.png](assets/images/docker/my_first_container_private_repo.png)
 
 # Reference Documentation
 - [docker run documentation](https://docs.docker.com/engine/reference/commandline/run/)

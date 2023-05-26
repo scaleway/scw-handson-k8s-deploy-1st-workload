@@ -4,8 +4,11 @@ title: "Config Map"
 permalink: /config-map
 nav_order: 10
 ---
-# Materials
-**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/08-configmap/ .**
+# Prerequisites
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/exercice-files/08-configmap/ .**
+```
+cd /home/ubuntu/exercice-files/08-configmap/
+```
 # Tasks
 ## Lifecycle Management
 ### Create a configmap
@@ -29,33 +32,11 @@ kubectl delete configmaps app-config-file
 ### As environment variable
 
 We create here a pod on which we will inject the configmap (app-config) previously created as environment variables. The container displays the APP_COLOR and the target environment in its logs.
-```
-apiVersion: v1
-kind: Pod
-metadata:
- labels:
-   app: pod-configmap-env
- name: pod-configmap-env
-spec:
- containers:
- - image: busybox:latest
-   name: pod-configmap-env
-   command: [sh]
-   args:
-     - "-c"
-     - "while true; do echo $APP_COLOR $ENVIRONMENT ; sleep 5;done" # We display here the message
-   env:
-    - name: APP_COLOR
-      valueFrom:
-        configMapKeyRef:
-             name: app-config           # The ConfigMap this value comes from.
-             key: APP_COLOR # The key to fetch.
-    - name: ENVIRONMENT
-      valueFrom:
-        configMapKeyRef:
-             name: app-config           # The ConfigMap this value comes from.
-             key: ENVIRONMENT # The key to fetch.
-```
+<br/>
+We  use here the yaml file **/home/ubuntu/exercice-files/07-storage/pod-configmap-env.yaml**.
+
+- `cat pod-configmap-env.yaml`
+
 
 ```
 kubectl create -f pod-configmap-env.yaml
@@ -68,38 +49,11 @@ kubectl logs pod-configmap-env -f
 
 ### As Volume
 Here we  create a pod , on which configmap values will be mounted as volume. 
-```
-apiVersion: v1
-kind: Pod
-metadata:
- labels:
-   app: pod-configmap-vol
- name: pod-configmap-vol
-spec:
- containers:
- - image: busybox:latest
-   name: pod-configmap-vol
-   command: [sh]
-   args:
-     - "-c"
-     - "sleep 4800" # We display here the message
-   volumeMounts:
-     - name: app-config
-       mountPath: "/config"
-       readOnly: true
- volumes:
- # You set volumes at the Pod level, then mount them into containers inside that Pod
- - name: app-config
-   configMap:
-     # Provide the name of the ConfigMap you want to mount.
-     name: app-config
-     # An array of keys from the ConfigMap to create as files
-     items:
-     - key: "APP_COLOR"
-       path: "app_color.properties"
-     - key: "ENVIRONMENT"
-       path: "environment.properties"
-```
+<br/>
+We  use here the yaml file **/home/ubuntu/exercice-files/07-storage/pod-configmap-volume.yaml**.
+
+- `cat pod-configmap-volume.yaml`
+
 ```
 kubectl create -f pod-configmap-volume.yaml
 ```
