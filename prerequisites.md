@@ -5,10 +5,7 @@ permalink: /prerequisites
 nav_order: 2
 ---
 # Attendee Materials
-A **Scaleway instance (Ubuntu)**  will be provided to each attendee with the following tools pre installed : 
-- Docker
-- Kubectl
-- [Scaleway CLI](https://github.com/scaleway/scaleway-cli/tree/master)<br />
+
 This Hands-on requires the attendee to have the software to establish a SSH connection with that instance on the default port 22. <br />
 e.g.:
   - **Linux Based OS**
@@ -20,7 +17,31 @@ e.g.:
     - Mobaxterm
     - …
   
-# SSH Connection
+# Attendee Environment
+## Overview
+![Environment Overview](assets/images/attendee_material_architecture.png)
+- A **Scaleway instance (Ubuntu)**  will be provided to each attendee with the following tools pre installed : 
+  - Docker
+  - Kubectl
+  - [Scaleway CLI](https://github.com/scaleway/scaleway-cli/tree/master)
+- Scaleway Container Registry to hold attendee docker image
+- Scaleway Kapsule
+- An Object Storage that hold SSH Materials to connect to tool Instance
+
+**NB:** The Tool instance has also be pre configured with environment variables to ease your connection to your Container Registry and scaleway CLI usage (see below).
+
+
+|Variable|Description|Purpose|
+|--|--|--|
+| SCW_REGISTRY_NAME | Container Registry Name | Docker connection|
+| SCW_REGISTRY_SERVER | Registry Server url  |Docker connection|
+| SCW_REGISTRY_ENDPOINT | Registry endpoint (concat of server and name) |Docker connection|
+| SCW_SECRET_KEY | CLI Credentials |CLI configuration|
+| SCW_ACCESS_KEY | CLI Credentials |CLI configuration|
+| SCW_DEFAULT_ORGANIZATION_ID | Scaleway Organization |CLI configuration|
+| SCW_DEFAULT_PROJECT_ID | Scaleway Attendee Project |CLI configuration|
+
+## Tool Instance SSH Connection
 
 1. Connect to your Scaleway Console 
 2. Pick the project that is assigned to you according to the guide and information we previously provided

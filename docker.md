@@ -77,24 +77,22 @@ You should be able to reach your nginx container using your instance public ip o
 
 ## Deploy your image on a Container registry (Scaleway container registry)
 Each attendee project has been provisioned with a Scaleway Container Registry. A container registry holds images that are built as part of your project. 
-1. Retrieve your container Endpoint
-![Container Exposition](assets/images/docker/registry_endpoint.png)
-2. Retrieve the Scaleway Secret that have been using Scaleway IAM to provide access to your registry
-3. Sign in to your container registry
+
+![Astuce icon](assets/images/astuce_icon.png) Environment variables used here have been pre provisioned to ease your work See [Attendee Environment](prerequisites#overview) 
+
+1. Sign in to your container registry
 ```
 sudo docker login $SCW_REGISTRY_ENDPOINT -u nologin --password-stdin <<< "$SCW_SECRET_KEY" 
 ```
-- Replace $SCW_REGISTRY_ENDPOINT with the endpoint
-- Replace the expression $SCW_SECRET_KEY with the secret
-4. Build and Tag your custom image
+1. Build and Tag your custom image
 ```
 sudo docker build -t $SCW_REGISTRY_ENDPOINT/my-first-image:0.1 01-docker/my-first-image
 ```
-5. Push your custom image
+1. Push your custom image
 ```
 sudo docker push $SCW_REGISTRY_ENDPOINT/my-first-image:0.1 
 ```
-6. Run a container based on the pushed image
+1. Run a container based on the pushed image
 ```
 sudo docker run -p 8082:80 -d  $SCW_REGISTRY_ENDPOINT/my-first-image:0.1
 ```

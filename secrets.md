@@ -113,15 +113,17 @@ kubectl exec pod-secrets-volume -- cat /db-config/app_password
 ```
 
 ## Image Pull Secrets
-In order to pull an image from a private container registry, kubernetes needs credentials. These credentials are stored as “Image Pull Secrets”. Here we will handle how to connect to the scaleway container registry to pull the image we have uploaded in the Docker Part. 
+In order to pull an image from a private container registry, kubernetes needs credentials. These credentials are stored as “Image Pull Secrets”.
+
+![Astuce icon](assets/images/astuce_icon.png) Environment variables used here have been pre provisioned to ease your work See [Attendee Environment](prerequisites#overview) 
 <br/>
 1. We first create the kubernetes secret with the username corresponding to the registry name and the password to our scaleway secret key (These data have already been generated in the instance tool as environment variables).
 ```
-kubectl create secret docker-registry registry-secret --docker-server=rg.fr-par.scw.cloud --docker-username=$SCW_REGISTRY_NAME --docker-password=$SCW_SECRET_KEY
+kubectl create secret docker-registry registry-secret --docker-server=${SCW_REGISTRY_SERVER} --docker-username=$SCW_REGISTRY_NAME --docker-password=$SCW_SECRET_KEY
 ```
-2. We then indicate the new image when we create the workload object (pod, deployments, …).
+1. We then indicate the new image when we create the workload object (pod, deployments, …).
 ```
-kubectl run my-first-image --image=rg.fr-par.scw.cloud/$SCW_REGISTRY_NAME/my-first-image:0.1
+kubectl run my-first-image --image=${SCW_REGISTRY_SERVER}/$SCW_REGISTRY_NAME/my-first-image:0.1
 ```
 ![Image pull registry](assets/images/secrets/image_pull_registry_pod_deployment.png)
 Our custom image being an nginx application, we could validate its deployment by looking for the welcome page.
