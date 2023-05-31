@@ -30,19 +30,19 @@ kubectl create ns ns2
 ```
 kubectl get pods -n ns1
 ```
-![Pods in namespaces](/assets/images/namespaces/ns1_without_pod.png)
+![Pods in namespaces](assets/images/namespaces/ns1_without_pod.png)
    - **Deploy a pod within a namespace**
 ```
 kubectl run  nginx-ns1 -n ns1 --image=nginx:latest
 kubectl get pods -n ns1
 ```
-![Pods in namespaces](/assets/images/namespaces/ns1_with_pod.png)
+![Pods in namespaces](assets/images/namespaces/ns1_with_pod.png)
    - **Deploy a service within a namespace**
 ```
 kubectl expose pod nginx-ns1 -n ns1 --target-port=80  --port=80 --type=ClusterIP
 kubectl get svc -n ns1
 ```
-![Pods in namespaces](/assets/images/namespaces/ns1_with_services.png)
+![Pods in namespaces](assets/images/namespaces/ns1_with_services.png)
 ## Service DNS 
 
 - Request a service from the same namespace 

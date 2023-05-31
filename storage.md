@@ -20,7 +20,7 @@ kubectl get sc
 ![Storage Classes List](assets/images/storage/storage_classes_list.png)
 <br/>
 
-![Astuce icon](assets/images/astuce_icon.png) Scaleway Kapsule integrates with Scaleway CSI to natively allow dynamic provisioning of R/W only storages.
+![Astuce icon](assets/images/astuce_icon.png) Scaleway Kapsule integrates with Scaleway CSI to natively allow dynamic provisioning of R/W once storages.
 
 ## Persistent Volume Claims
 ### Creation
