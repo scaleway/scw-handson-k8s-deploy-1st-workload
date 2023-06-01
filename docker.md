@@ -55,17 +55,14 @@ We will use the nginx official image we used before to create our own image that
 
 1. Open the exercice file folder <br/>
 `cd /home/ubuntu/exercice-files/exercice-files/01-docker/`
-1. Read the Dockerfile content <br/>
+2. Read the Dockerfile content <br/>
 `cat my-first-image/Dockerfile`
-
 ![my_first_docker_image.png](assets/images/docker/my_first_docker_image.png)
 3. Build your image
 ```
 sudo docker build -t my-first-image my-first-image
 ```
-
 ![Build Image](assets/images/docker/build-image.png)
-
 4. Run a Container upon your Image
 ```
 sudo docker run -p 8081:80 -d my-first-image

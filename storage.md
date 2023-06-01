@@ -39,50 +39,37 @@ The block created is available but not yet attached to an instance as it is not 
 kubectl get pvc -o wide
 ```
 ### POD Attachment
-We will use our PVC to claim storage for a postgres database. 
-We  use here the yaml file **/home/ubuntu/exercice-files/07-storage/postgres-deployment.yaml**.
-
-- `cat postgres-deployment.yaml`
-
+1. We bound the PVC previously created as volume to our POD.
+We  use here the yaml file **/home/ubuntu/exercice-files/07-storage/pvc-deployment.yaml**
+<br/>
+`cat pvc-deployment.yaml`
 ```
-kubectl create -f postgres-deployment.yaml
+kubectl create -f pvc-deployment.yaml
 ```
 The volume is created and associated with an instance (see below.)
 ![Block Volume  attached](assets/images/storage/block_volume_attached.png)
 
+2. We can now create a file within the volume 
+```
+kubectl exec -it pvc-deployment-7b5c6f6c59-bn228 -- sh -c 'echo persist in that file > /data/file.txt'
+```
+
+3. Finally file can be read 
+```
+kubectl exec -it pvc-deployment-7b5c6f6c59-56dwn -- cat /data/file.txt
+```
+![Read File persisted](assets/images/storage/read_file_persisted.png)
+
 ## Persistence Testing
-We use here a psql client to ensure that the database information is stored and kept even after pod deletion. 
-We  use here the yaml file **/home/ubuntu/exercice-files/07-storage/psql-client.yaml**.
-
-- `cat psql-client.yaml`
-
+1. We  delete the POD(so the containers) to ensure that the volume have been kept and attached to the new pod.
 ```
-kubectl create -f psql-client.yaml
+kubectl delete pod pvc-deployment-7b5c6f6c59-56dwn
 ```
-
-2. We connect to the database (using kubectl exec) and execute sql requests against our database
- 
+2. We ensure that on the new pod the data remains
 ```
-kubectl exec -it psql-client -- sh
+kubectl exec -it pvc-deployment-7b5c6f6c59-x5cd2 -- cat /data/file.txt
 ```
-```
-psql -h postgres-svc -U postgres
-```
-
-![Astuce icon](assets/images/astuce_icon.png) The database password is postgres.
-
-```
-CREATE TABLE CLOUD_PROVIDER(ID SERIAL PRIMARY KEY NOT NULL,NAME TEXT NOT NULL);
-INSERT INTO CLOUD_PROVIDER(NAME) VALUES('scaleway');
-```
-
-1. Finally we delete the pod and ensure that the data we previously created remains.
-   
-```
-kubectl delete pod postgresql*  #autocomplete could be used here to find the right pod
-psql -h postgres-svc -U postgres
-SELECT * from CLOUD_PROVIDER
-```
+![Read File persisted](assets/images/storage/read_file_persisted.png)
 
 # Reference documentation
 [Persistent Volumes](https://kubernetes.io/fr/docs/concepts/storage/persistent-volumes/)
