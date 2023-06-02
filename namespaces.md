@@ -66,7 +66,7 @@ kubectl config set-context --current --namespace=ns1
 ```
 kubectl get pods
 ```
-![Set Context Namespace](/assets/images/namespaces/namespace_set_context.png)
+![Set Context Namespace](assets/images/namespaces/namespace_set_context.png)
 # Reference Documentation
 [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 [POD DNS ](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
