@@ -8,7 +8,7 @@ nav_order: 2
 
 This Hands-on requires the attendee to have the software to establish a SSH connection with that instance on the default port 22. <br />
 e.g.:
-  - **Linux Based OS**
+  - **Linux Based OS** and **Mac OS**
     - SSH client
     - scp client 
   - **Windows**
@@ -51,13 +51,15 @@ e.g.:
 ![Get SSH Materials](assets/images/prerequisites/ssh_materials_1.png)
 ![Get SSH Materials](assets/images/prerequisites/ssh_materials_2.png)
 5. Connect to your Scaleway instance using your SSH Client
-- **Linux Based OS**
+- **Linux Based OS** and **Mac OS**
 ```
-ssh -i ~/Downloads/private_key ubuntu@${TOOL_PUBLIC_IP}
+ssh -i ~/Downloads/private_key ubuntu@TOOL_PUBLIC_IP
 ```
+- TOOL_PUBLIC_IP being the public IP of your dedicated tooling instance
+
 **NB** : If you have error about permissions on the file you should execute the following command to update your private key permissions.
 ```
-chmod 600 ~/Downloads/private_key
+sudo chmod 0600 ~/Downloads/private_key
 ```
 - **Windows Based OS**
 

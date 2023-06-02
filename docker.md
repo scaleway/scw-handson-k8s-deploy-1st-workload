@@ -5,7 +5,7 @@ permalink: /docker
 nav_order: 3
 ---
 # Prerequisites
-**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/exercice-files/exercice-files/01-docker/ .**
+**Finished code for this lesson is available on the Instance Tool at the folder /home/ubuntu/exercice-files/01-docker/ .**
 # Tasks
 
 ## Setup Validation
@@ -30,7 +30,7 @@ sudo docker run -p 80:80 -d  nginx:latest
 ![Docker Nginx Validation](assets/images/docker/nginx_docker.png)
 
 - -p option binds port 80 of the container to port 80 on the machine itself
-- --name specifies a name for the container
+- \-\-name refers a name for the container
 - -d runs the container in background (detached mode)
 
 You should be able to reach your nginx container using your instance public ip and your local browser.
@@ -54,16 +54,16 @@ sudo docker ps -a
 We will use the nginx official image we used before to create our own image that will show a different homepage.
 
 1. Open the exercice file folder <br/>
-`cd /home/ubuntu/exercice-files/exercice-files/01-docker/`
-2. Read the Dockerfile content <br/>
+`cd /home/ubuntu/exercice-files/01-docker/`
+1. Read the Dockerfile content <br/>
 `cat my-first-image/Dockerfile`
 ![my_first_docker_image.png](assets/images/docker/my_first_docker_image.png)
-3. Build your image
+1. Build your image
 ```
 sudo docker build -t my-first-image my-first-image
 ```
 ![Build Image](assets/images/docker/build-image.png)
-4. Run a Container upon your Image
+1. Run a Container upon your Image
 ```
 sudo docker run -p 8081:80 -d my-first-image
 ```

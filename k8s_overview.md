@@ -20,7 +20,7 @@ It could be downloaded either from the Scaleway Console or using the Scaleway CL
 ![Kubectl configuration console](assets/images/k8s_overview/kubectl_config_console_2.png)
 2. Use scp command or your favorite scp client to push the kubernetes configuration file from your local machine to the tool instance
 ```
-scp -i ~/Downloads/private_key /home/damnda/Downloads/kubeconfig-handson-k8s-cluster.yaml ubuntu@${TOOL_PUBLIC_IP}:/home/ubuntu/.kube/config
+scp -i ~/Downloads/private_key /home/damnda/Downloads/kubeconfig-handson-k8s-cluster.yaml ubuntu@TOOL_PUBLIC_IP:/home/ubuntu/.kube/config
 ```
 - TOOL_PUBLIC_IP being the public IP of your dedicated tooling instance
 
